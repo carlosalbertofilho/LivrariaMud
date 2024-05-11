@@ -8,14 +8,14 @@ public class Book
      string author,
      Category category,
      PublishingCompany publishingCompany,
-     DateTime publisherAt,
+     DateTime publishedAt,
      int id = 0,
      string cover = "",
      string synopsis = "" )
 {
     private string title = title;
     private string author = author;
-    private DateTime publisherAt = publisherAt;
+    private DateTime publishedAt = publishedAt;
     private Category category = category;
     private PublishingCompany publishingCompany = publishingCompany;
 
@@ -37,13 +37,13 @@ public class Book
             author = value;
         }
     }
-    public DateTime PublisherAt
+    public DateTime PublishedAt
     {
-        get => publisherAt; private set
+        get => publishedAt; private set
         {
             if ( value == DateTime.MinValue )
                 throw new ArgumentException( "PublisherAt is required", nameof( value ) );
-            publisherAt = value;
+            publishedAt = value;
         }
     }
     public Category Category
@@ -72,7 +72,7 @@ public class Book
                         string author,
                         Category category,
                         PublishingCompany publishingCompany,
-                        DateTime publisherAt,
+                        DateTime publishedAt,
                         int id,
                         string cover,
                         string synopsis )
@@ -81,7 +81,7 @@ public class Book
         Author = author;
         Category = category;
         PublishingCompany = publishingCompany;
-        PublisherAt = publisherAt;
+        PublishedAt = publishedAt;
         Id = id;
         Cover = cover;
         Synopsis = synopsis;
