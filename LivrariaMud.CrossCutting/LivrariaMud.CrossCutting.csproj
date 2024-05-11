@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LivrariaMud.Application\LivrariaMud.Application.csproj" />
+    <ProjectReference Include="..\LivrariaMud.Domain\LivrariaMud.Domain.csproj" />
+    <ProjectReference Include="..\LivrariaMud.Infrastructure\LivrariaMud.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
