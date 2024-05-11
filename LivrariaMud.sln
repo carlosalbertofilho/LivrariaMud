@@ -11,15 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{DE59597D-7215-4403-96CF-DFD0E4BC32F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivrariaMud.Domain", "LivrariaMud.Domain\LivrariaMud.Domain.csproj", "{46B92843-1EF8-4AFE-BF0B-8FAD3C0285F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivrariaMud.Domain", "LivrariaMud.Domain\LivrariaMud.Domain.csproj", "{46B92843-1EF8-4AFE-BF0B-8FAD3C0285F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivrariaMud.Application", "LivrariaMud.Application\LivrariaMud.Application.csproj", "{B1A01A6D-B06E-47A7-9E7B-862A944B9FEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivrariaMud.Application", "LivrariaMud.Application\LivrariaMud.Application.csproj", "{B1A01A6D-B06E-47A7-9E7B-862A944B9FEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivrariaMud.Infrastructure", "LivrariaMud.Infrastructure\LivrariaMud.Infrastructure.csproj", "{02ED24FA-B97D-4005-AEBC-5FA709AB3956}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivrariaMud.Infrastructure", "LivrariaMud.Infrastructure\LivrariaMud.Infrastructure.csproj", "{02ED24FA-B97D-4005-AEBC-5FA709AB3956}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivrariaMud.Web", "LivrariaMud.Web\LivrariaMud.Web.csproj", "{99181770-D16E-4070-99D4-45E4645E2C7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivrariaMud.Web", "LivrariaMud.Web\LivrariaMud.Web.csproj", "{99181770-D16E-4070-99D4-45E4645E2C7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivrariaMud.CrossCutting", "LivrariaMud.CrossCutting\LivrariaMud.CrossCutting.csproj", "{1F1EE6AE-DAC2-4627-A74A-BC01F7745FC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivrariaMud.CrossCutting", "LivrariaMud.CrossCutting\LivrariaMud.CrossCutting.csproj", "{1F1EE6AE-DAC2-4627-A74A-BC01F7745FC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
