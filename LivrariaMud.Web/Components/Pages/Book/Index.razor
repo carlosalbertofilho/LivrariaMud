@@ -1,0 +1,52 @@
+﻿@page "/books"
+@inject IBookService service
+
+<PageTitle>Books</PageTitle>
+
+<MudText Typo="Typo.h3" GutterBottom="true">Catalog of Books</MudText>
+
+@switch (Status)
+{
+    case true:
+        @foreach (var book in DataList)
+        {
+            <MudCard>
+                <MudCardHeader Title="@book.Title" />
+                <MudCardContent>
+                    <MudText Typo="Typo.body1">Title: @book.Title</MudText>
+                    <MudText Typo="Typo.body1">Category: @book.Category</MudText>
+                    <MudText Typo="Typo.body1">Publishing Company: @book.PublishingCompany</MudText>
+                </MudCardContent>
+            </MudCard>
+        }
+        break;
+    case false:
+        @foreach (var error in Errors)
+        {
+            <MudAlert Severity="Severity.Error">@error</MudAlert>
+        }
+        break;
+    default:
+        <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+        break;
+}
+
+@code 
+{
+    private BookHandler? result;
+    private bool? Status = null;
+    private IEnumerable<ViewBook> DataList = [];
+    private List<string> Errors = [];
+
+    protected override async Task OnInitializedAsync ()
+    {
+        result = new BookHandler( service );
+        (Status, DataList, Errors) = await result.GetAllBooksHandler();
+
+        if (DataList.Count() == 0)
+        {
+            Errors.Add("No books found.");
+            Status = false;
+        }
+    }
+}
