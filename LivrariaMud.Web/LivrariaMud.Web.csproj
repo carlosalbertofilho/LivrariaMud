@@ -17,7 +17,8 @@
 
   
   <ItemGroup>
-    <ProjectReference Include="..\LivrariaMud.Infrastructure\LivrariaMud.Infrastructure.csproj" />
+    <ProjectReference Include="..\LivrariaMud.Application\LivrariaMud.Application.csproj" />
+    <ProjectReference Include="..\LivrariaMud.CrossCutting\LivrariaMud.CrossCutting.csproj" />
   </ItemGroup>
   
 </Project>

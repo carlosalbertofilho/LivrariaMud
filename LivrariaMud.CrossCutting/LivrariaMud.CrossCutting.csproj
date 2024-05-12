@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DependenciesApp\AddAppIsDevelopment.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\LivrariaMud.Application\LivrariaMud.Application.csproj" />
     <ProjectReference Include="..\LivrariaMud.Domain\LivrariaMud.Domain.csproj" />
     <ProjectReference Include="..\LivrariaMud.Infrastructure\LivrariaMud.Infrastructure.csproj" />

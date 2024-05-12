@@ -1,13 +1,21 @@
+using LivrariaMud.CrossCutting.DependenciesApp;
 using LivrariaMud.Web.Components;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add DbContext
+builder.Services.AddDbApp( builder.Configuration );
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+// Front lib
 builder.Services.AddMudServices();
+
+// Add services to the container.
+builder.Services.AddServiceApp();
 
 var app = builder.Build();
 
