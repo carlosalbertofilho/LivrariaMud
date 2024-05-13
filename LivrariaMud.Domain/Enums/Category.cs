@@ -1,5 +1,4 @@
 ﻿namespace LivrariaMud.Domain.Enums;
-
 public enum Category
 {
     Informatica = 1,

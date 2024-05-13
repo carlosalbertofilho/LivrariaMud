@@ -5,33 +5,39 @@
 
 <MudText Typo="Typo.h3" GutterBottom="true">Catalog of Books</MudText>
 
-@switch (Status)
-{
-    case true:
-        @foreach (var book in DataList)
-        {
-            <MudCard>
-                <MudCardHeader Title="@book.Title" />
-                <MudCardContent>
-                    <MudText Typo="Typo.body1">Title: @book.Title</MudText>
-                    <MudText Typo="Typo.body1">Category: @book.Category</MudText>
-                    <MudText Typo="Typo.body1">Publishing Company: @book.PublishingCompany</MudText>
-                </MudCardContent>
-            </MudCard>
-        }
-        break;
-    case false:
-        @foreach (var error in Errors)
-        {
-            <MudAlert Severity="Severity.Error">@error</MudAlert>
-        }
-        break;
-    default:
-        <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
-        break;
-}
+<MudPaper Class="d-flex justify-end" Elevation="0">
+    <MudFab Color="Color.Secondary" Href="/books/create"
+        StartIcon="@Icons.Material.Filled.Edit" Label="Add Book" />
+</MudPaper>
 
-@code 
+<MudPaper Class="d-flex justify-center flex-grow-1 gap-4 pa-md-6 mx-lg-auto" Elevation="0">
+    @switch ( Status )
+    {
+        case true:
+            @foreach ( var book in DataList )
+            {
+                <MudCard>
+                    <MudCardHeader Title="@book.Title" />
+                    <MudCardContent>
+                        <MudText Typo="Typo.body1">Title: @book.Title</MudText>
+                        <MudText Typo="Typo.body1">Category: @book.Category</MudText>
+                        <MudText Typo="Typo.body1">Publishing Company: @book.PublishingCompany</MudText>
+                    </MudCardContent>
+                </MudCard>
+            }
+            break;
+        case false:
+            @foreach ( var error in Errors )
+            {
+                <MudAlert Severity="Severity.Error">@error</MudAlert>
+            }
+            break;
+        default:
+            <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+            break;
+    }
+</MudPaper>
+@code
 {
     private BookHandler? result;
     private bool? Status = null;
@@ -41,11 +47,11 @@
     protected override async Task OnInitializedAsync ()
     {
         result = new BookHandler( service );
-        (Status, DataList, Errors) = await result.GetAllBooksHandler();
+        (Status, DataList, Errors) = await result.GetAllBooks();
 
-        if (DataList.Count() == 0)
+        if ( DataList.Count() == 0 )
         {
-            Errors.Add("No books found.");
+            Errors.Add( "No books found." );
             Status = false;
         }
     }

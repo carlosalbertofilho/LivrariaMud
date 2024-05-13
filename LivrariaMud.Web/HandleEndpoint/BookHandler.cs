@@ -13,7 +13,7 @@ public class BookHandler
     private IEnumerable<ViewBook> DataList = [];
     private List<string> Errors = [];
 
-    public async Task<(bool? Status, IEnumerable<ViewBook> dataList, List<string> errors)> GetAllBooksHandler ()
+    public async Task<(bool? Status, IEnumerable<ViewBook> dataList, List<string> errors)> GetAllBooks ()
     {
         try
         {
@@ -36,7 +36,7 @@ public class BookHandler
             return ( Status, DataList, Errors );
         }
     }
-    public async Task<(bool? Status, ViewBook? Data, List<string> Errors)> GetBookByIdHandler ( int BookId )
+    public async Task<(bool? Status, ViewBook? Data, List<string> Errors)> GetBookById ( int BookId )
     {
         try
         {
@@ -59,7 +59,7 @@ public class BookHandler
             return (Status, Data, Errors);
         }
     }
-    public async Task<(bool? Status, ViewBook? Data, List<string> Errors)> CreateBookHandler ( EditBook book )
+    public async Task<(bool? Status, ViewBook? Data, List<string> Errors)> CreateBook ( EditBook book )
     {
         try
         {
@@ -83,7 +83,7 @@ public class BookHandler
         }
     }
 
-    public async Task<(bool? Status, ViewBook? Data, List<string> Errors)> UpdateBookHandler ( EditBook book )
+    public async Task<(bool? Status, ViewBook? Data, List<string> Errors)> UpdateBook ( EditBook book )
     {
         try
         {
@@ -107,7 +107,7 @@ public class BookHandler
         }
     }
 
-    public async Task<(bool? Status, ViewBook? Data, List<string> Errors)> DeleteBookHandler ( int BookId )
+    public async Task<(bool? Status, ViewBook? Data, List<string> Errors)> DeleteBook ( int BookId )
     {
         try
         {

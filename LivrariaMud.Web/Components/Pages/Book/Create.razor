@@ -1,0 +1,52 @@
+﻿@page "/books/create"
+@inject IBookService service
+
+<PageTitle>Create Book</PageTitle>
+
+<MudText Typo="Typo.h3">Create a new book</MudText>
+
+<MudPaper Class="d-flex justify-center pt-3 mx-lg-auto ">
+    <EditForm Model="@EditBook" method="post" OnValidSubmit="SubmitHandle">
+        <DataAnnotationsValidator />
+        <MudGrid>
+            <MudCardContent>
+                <MudTextField Label="Title" @bind-Value="@EditBook!.Title" For="@(() => EditBook!.Title)" />
+                <MudTextField Label="Author" @bind-Value="@EditBook.Author" For="@(() => EditBook.Author)" />
+                <MudSelect Placeholder="Select the Category" Label="Category"
+                           @bind-Value="@EditBook.Category">
+                    @foreach ( var category in Enum.GetValues( typeof( Category ) ).Cast<Category>() )
+                    {
+                        <MudSelectItem T="Category" Value="@category">@category</MudSelectItem>
+                    }
+                </MudSelect>
+                <MudSelect Placeholder="Select the publishing company" Label="Publishing Company"
+                           @bind-Value="@EditBook.PublishingCompany" >
+                    @foreach ( var publishingCompany in Enum.GetValues( typeof( PublishingCompany ) ).Cast<PublishingCompany>() )
+                    {
+                        <MudSelectItem T="PublishingCompany" Value="@publishingCompany">@publishingCompany</MudSelectItem>
+                    }
+                </MudSelect>
+                <MudDatePicker Label="Release Date" @bind-Value="@EditBook.PublishedAt" />
+                <MudTextField Label="Cover" @bind-Value="@EditBook.Cover" For="@(() => EditBook.Cover)" />
+                <MudTextField Label="Sinopsis" @bind-Value="@EditBook.Synopsis" For="@(() => EditBook.Synopsis)" />
+
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Type="submit">Save</MudButton>
+                <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Href="/books">Cancel</MudButton>
+            </MudCardContent>
+        </MudGrid>
+    </EditForm>
+</MudPaper>
+
+@code {
+    private EditBook? EditBook { get; set; }
+        = new( "", "", Category.Nenhum, PublishingCompany.Nenhum, DateTime.UtcNow );
+    private bool? Status = null;
+    private ViewBook? Data;
+    private List<string> Errors = [];
+
+    private async Task SubmitHandle ()
+    {
+        var result = new BookHandler( service );
+        (Status, Data, Errors) = await result.CreateBook( EditBook! );
+    }
+}
