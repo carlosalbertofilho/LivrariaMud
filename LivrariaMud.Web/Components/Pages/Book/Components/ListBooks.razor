@@ -1,0 +1,21 @@
+﻿@foreach ( var book in DataList )
+{
+    <MudCard Style="width: 200px">
+    <MudCardMedia Image="@($"image/{@book.Cover}")" Height="200" Style="width: 200px" />
+    <MudCardContent>
+        <MudText Typo="Typo.h5">@book.Title</MudText>
+        <MudText Typo="Typo.body2">Author: @book.Author</MudText>
+        <MudText Typo="Typo.body2">@book.Category - @book.PublishingCompany</MudText>
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton Href="@($"/books/update/{@book.Id}")" Variant="Variant.Text" Color="Color.Primary">Edit</MudButton>
+        <MudButton Href="@($"/books/delete/{@book.Id}")" Variant="Variant.Text" Style="@($"color:{Colors.Red.Default}")">Delete</MudButton>
+    </MudCardActions>
+</MudCard>
+}
+
+@code {
+    [Parameter]
+    public IEnumerable<ViewBook> DataList { get; set; } = [];
+
+}

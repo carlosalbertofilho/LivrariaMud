@@ -1,0 +1,81 @@
+﻿
+@inject IBookService service
+
+<MudPaper Class="d-flex justify-center mt-6" Style="width: auto; height: max-content;">
+    <EditForm Model="@EditBook" method="post" OnValidSubmit="SubmitHandle">
+        <DataAnnotationsValidator />
+        <MudGrid>
+            <MudItem xs="12" Style="mud-width-full">
+                <MudTextField Label="Title" @bind-Value="@EditBook!.Title" For="@(() => EditBook!.Title)" />
+                <MudTextField Label="Author" @bind-Value="@EditBook.Author" For="@(() => EditBook.Author)" />
+                <MudSelect Placeholder="Select the Category" Label="Category"
+                           @bind-Value="@EditBook.Category">
+                    @foreach ( var category in Enum.GetValues( typeof( Category ) ).Cast<Category>() )
+                    {
+                        <MudSelectItem T="Category" Value="@category">@category</MudSelectItem>
+                    }
+                </MudSelect>
+                <MudSelect Placeholder="Select the publishing company" Label="Publishing Company"
+                           @bind-Value="@EditBook.PublishingCompany">
+                    @foreach ( var publishingCompany in Enum.GetValues( typeof( PublishingCompany ) ).Cast<PublishingCompany>() )
+                    {
+                        <MudSelectItem T="PublishingCompany" Value="@publishingCompany">@publishingCompany</MudSelectItem>
+                    }
+                </MudSelect>
+                <MudDatePicker Label="Release Date" @bind-Value="@EditBook.PublishedAt"
+                               Placeholder="@(EditBook.PublishedAt.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture))"
+                    Editable="true" Mask="@(new DateMask("dd/MM/yyyy"))" DateFormat="dd/MM/yyyy" Required="true" />
+                <MudTextField Label="Cover" @bind-Value="@EditBook.Cover" />
+                <MudTextField Label="Sinopsis" @bind-Value="@EditBook.Synopsis" />
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled"
+                               Color="Color.Primary" Class="ml-auto">@messageToSubmit</MudButton>
+                    <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Href="/books">Cancel</MudButton>
+                </MudCardActions>
+            </MudItem>
+        </MudGrid>
+    </EditForm>
+</MudPaper>
+
+@code {
+    [Parameter] public int BookId { get; set; } = 0;
+    [Parameter]
+    public EventCallback<(bool? Status, ViewBook? Data, List<string> Errors)> OnChange { get; set; }
+
+    private EditBook? EditBook { get; set; }
+        = new( "", "", Category.Nenhum, PublishingCompany.Nenhum, DateTime.Today );
+
+    private string messageToSubmit = "Create";
+
+    protected override async Task OnInitializedAsync ()
+    {
+        if (BookId > 0 )
+        {
+            var result = new BookHandler( service );
+            var (status, data, errors) = await result.GetBookById( BookId );
+
+            if ( status is true )
+            {
+                EditBook = data!;
+                messageToSubmit = "Update";
+            }
+            else
+                await OnChange.InvokeAsync( (status, data, errors) );
+        }
+    }
+
+    private async Task SubmitHandle ()
+    {
+        bool? Status = false;
+        ViewBook? Data = null!;
+        List<string> Errors = [];
+
+        var result = new BookHandler( service );
+        if ( BookId == 0 )
+            (Status, Data, Errors) = await result.CreateBook( EditBook! );
+        else if ( BookId > 0 )
+            (Status, Data, Errors) = await result.UpdateBook( EditBook! );
+
+        await OnChange.InvokeAsync( (Status, Data, Errors) );
+    }
+}

@@ -1,0 +1,14 @@
+﻿
+
+<MudPaper Class="d-flex flex-column flex-grow-1 gap-4">
+    @foreach ( var error in Errors )
+    {
+        <MudAlert Severity="Severity.Error">@error</MudAlert>
+    }
+</MudPaper>
+
+@code {
+    [Parameter]
+    public List<string> Errors { get; set; } = [];
+
+}

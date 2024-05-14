@@ -14,23 +14,10 @@
     @switch ( Status )
     {
         case true:
-            @foreach ( var book in DataList )
-            {
-                <MudCard>
-                    <MudCardHeader Title="@book.Title" />
-                    <MudCardContent>
-                        <MudText Typo="Typo.body1">Title: @book.Title</MudText>
-                        <MudText Typo="Typo.body1">Category: @book.Category</MudText>
-                        <MudText Typo="Typo.body1">Publishing Company: @book.PublishingCompany</MudText>
-                    </MudCardContent>
-                </MudCard>
-            }
+            <ListBooks DataList="DataList" />
             break;
         case false:
-            @foreach ( var error in Errors )
-            {
-                <MudAlert Severity="Severity.Error">@error</MudAlert>
-            }
+            <ShowErrors Errors="Errors" />
             break;
         default:
             <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />

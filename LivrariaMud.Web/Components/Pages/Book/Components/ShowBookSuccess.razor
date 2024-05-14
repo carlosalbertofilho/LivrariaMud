@@ -1,0 +1,31 @@
+﻿<MudCard Outlined="true" Class="background:{Colors.Green.Default}">
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h5">@Message</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudText>@Book.Id -- @Book.Title</MudText>
+        <MudText Typo="Typo.body2">Author: @Book.Author</MudText>
+        <MudText Typo="Typo.body2">Category: @Book.Category</MudText>
+        <MudText Typo="Typo.body2">Publishing Company: @Book.PublishingCompany</MudText>
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton Href="/books" Variant="Variant.Filled" Color="Color.Primary">Voltar</MudButton>
+    </MudCardActions>
+</MudCard>
+
+@code {
+    [Parameter] public ViewBook Book { get; set; } = null!;
+    [Parameter] public string? Message { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (Book is null)
+            throw new ArgumentNullException(nameof(Book));
+        if (Book.Id > 0 && string.IsNullOrWhiteSpace(Message))
+            Message = "Book updated successfully!";
+        else
+            Message = "Book created successfully!";
+    }
+}

@@ -1,6 +1,6 @@
-﻿@page "/books/create"
+﻿@page "/books/update/{BookId:int}"
 
-<PageTitle>Create Book</PageTitle>
+<PageTitle>@(BookId > 0 ? "Update" : "Create") Book</PageTitle>
 
 <MudText Typo="Typo.h3" GutterBottom="true">Create a new book</MudText>
 
@@ -14,12 +14,13 @@
             <ShowBookSuccess Book="Data" />
             break;
         default:
-            <EditBookForm  OnChange="OnChangeHandler" />              
+            <EditBookForm BookId="BookId" OnChange="OnChangeHandler" />
             break;
     }
 </MudPaper>
 
 @code {
+    [Parameter] public int BookId { get; set; }
     private bool? Status = null;
     private ViewBook? Data;
     private List<string> Errors = [];

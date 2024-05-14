@@ -23,4 +23,13 @@ public static class ViewBookExtension
                viewBook.Id,
                viewBook.Cover,
                viewBook.Synopsis );
+    public static ViewBook ToViewBook ( this EditBook editBook )
+        => new( editBook.Title,
+               editBook.Author,
+               editBook.Category,
+               editBook.PublishingCompany,
+               editBook.PublishedAt,
+               editBook.Id,
+               editBook.Cover,
+               editBook.Synopsis );
 }

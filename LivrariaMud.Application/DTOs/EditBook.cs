@@ -19,6 +19,8 @@ public class EditBook
         => book.ToEditBook();
     public static implicit operator Book ( EditBook editBook )
         => editBook.ToBook();
+    public static implicit operator EditBook ( ViewBook viewBook )
+        => viewBook.ToEditBook();
 
     public int Id { get; set; } = id;
     [Required( ErrorMessage = "Título do livro é obrigatório" )]

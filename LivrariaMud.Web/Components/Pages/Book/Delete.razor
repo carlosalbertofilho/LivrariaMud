@@ -1,0 +1,38 @@
+﻿@page "/books/delete/{BookId:int}"
+@inject IBookService service
+
+<PageTitle>@(BookId > 0 ? "Update" : "Create") Book</PageTitle>
+
+<MudText Typo="Typo.h3" GutterBottom="true">Create a new book</MudText>
+
+<MudPaper Class="d-flex justify-center flex-grow-1 gap-4 pa-md-6 mx-lg-auto" Elevation="0">
+    @switch ( Status )
+    {
+        case false:
+            <ShowErrors Errors="Errors" />
+            break;
+        case true:
+            <ShowBookSuccess Book="Data" Message="Book Deleted with Success!" />
+            break;
+        default:
+            <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+            break;
+    }
+</MudPaper>
+
+@code {
+    [Parameter] public int BookId { get; set; }
+    private bool? Status = null;
+    private ViewBook? Data;
+    private List<string> Errors = [];
+
+    protected override async Task OnInitializedAsync ()
+    {
+        var result = new BookHandler( service );
+        var (status, data, errors) = await result.DeleteBook( BookId );
+
+        Data = data;
+        Status = status;
+        Errors = errors;
+    }
+}
