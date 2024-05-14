@@ -1,9 +1,9 @@
 ﻿
 
-<MudPaper Class="d-flex flex-column flex-grow-1 gap-4">
+<MudPaper Class="d-flex flex-column flex-grow-1 gap-4 pa-md-6 mx-lg-auto mud-theme-secondary">
     @foreach ( var error in Errors )
     {
-        <MudAlert Severity="Severity.Error">@error</MudAlert>
+        <MudText Typo="Typo.body1">@error</MudText>
     }
 </MudPaper>
 

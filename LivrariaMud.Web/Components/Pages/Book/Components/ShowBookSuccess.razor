@@ -1,4 +1,4 @@
-﻿<MudCard Outlined="true" Class="background:{Colors.Green.Default}">
+﻿<MudCard Outlined="true" Class="mx-auto pa-6 mud-theme-success">
     <MudCardHeader>
         <CardHeaderContent>
             <MudText Typo="Typo.h5">@Message</MudText>
@@ -25,7 +25,7 @@
             throw new ArgumentNullException(nameof(Book));
         if (Book.Id > 0 && string.IsNullOrWhiteSpace(Message))
             Message = "Book updated successfully!";
-        else
+        else if (Book.Id == 0 && string.IsNullOrWhiteSpace(Message))
             Message = "Book created successfully!";
     }
 }
